@@ -58,9 +58,40 @@ function generatePassword() {
   if (includeSpecialChar === true) {
     totalChar += specialChar;
   }
-  for (var i = 0; i < numChar; i++) {
-    var randomChar = Math.floor(Math.random() * totalChar.length);
-    password += totalChar[randomChar]
+
+  while (true) {
+    for (var i = 0; i < numChar; i++) {
+      var randomChar = Math.floor(Math.random() * totalChar.length);
+      password += totalChar[randomChar];
+    }
+
+    var hasLowerLetter = false;
+    var hasUpperLetter = false;
+    var hasNum = false;
+    var hasSpecialChar = false;
+
+    for (i = 0; i < password.length; i++) {
+      if (lowercase.includes(password[i])) {
+        hasLowerLetter = true;
+      } else if (uppercase.includes(password[i])) {
+        hasUpperLetter = true;
+      }
+      if (nums.includes(password[i])) {
+        hasNum = true;
+      }
+      if (specialChar.includes(password[i])) {
+        hasSpecialChar = true;
+      }
+    }
+
+    if (
+      (!includeLower || hasLowerLetter) &&
+      (!includeUpper || hasUpperLetter) &&
+      (!includeNum || hasNum) &&
+      (!includeSpecialChar || hasSpecialChar)
+    ) {
+      break;
+    } 
   }
 
   console.log(password);
