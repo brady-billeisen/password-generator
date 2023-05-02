@@ -15,57 +15,57 @@ function generatePassword() {
   if (numChar >= 8 && numChar <= 128) {
   } else {
     alert('The number you entered is either too low or too high in value. Please try again');
-    return ""
+    return "";
   }
 
-  var lowQuestion = confirm(
-    'Would you like lowercase letters in your password?'
+  var includeLower = confirm(
+    'Would you like to include lowercase letters in your password?'
   );
 
-  var upQuestion = confirm(
-    'Would you like uppercase letters in your password?'
+  var includeUpper = confirm(
+    'Would you like to include uppercase letters in your password?'
   );
 
-  var numQuestion = confirm(
-    'Would you like numbers in your password?'
+  var includeNum = confirm(
+    'Would you like to include numbers in your password?'
   );
 
-  var specQuestion = confirm(
-    'Would you like special characters in your password?'
+  var includeSpecialChar = confirm(
+    'Would you like to include special characters in your password?'
   );
 
   if (
-    lowQuestion === false &&
-    upQuestion === false &&
-    numQuestion === false &&
-    specQuestion === false
+    includeLower === false &&
+    includeUpper === false &&
+    includeNum === false &&
+    includeSpecialChar === false
   ) {
     alert('No requirements selected');
   }
 
   var totalChar = "";
-  var randomPassword = "";
+  var password = "";
 
-  if (lowQuestion === true) {
+  if (includeLower === true) {
     totalChar += lowercase;
   }
-  if (upQuestion === true) {
+  if (includeUpper === true) {
     totalChar += uppercase;
   }
-  if (numQuestion === true) {
+  if (includeNum === true) {
     totalChar += nums;
   }
-  if (specQuestion === true) {
+  if (includeSpecialChar === true) {
     totalChar += specialChar;
   }
   for (var i = 0; i < numChar; i++) {
     var randomChar = Math.floor(Math.random() * totalChar.length);
-    randomPassword += totalChar[randomChar]
+    password += totalChar[randomChar]
   }
 
-  console.log(randomPassword);
+  console.log(password);
 
-  return randomPassword;
+  return password;
 }
 
 // Write password to the #password input
