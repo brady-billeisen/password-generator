@@ -65,6 +65,10 @@ function generatePassword() {
       password += totalChar[randomChar];
     }
 
+    if (password.length !== numChar) {
+      password = password.slice(0, numChar)
+    }
+
     var hasLowerLetter = false;
     var hasUpperLetter = false;
     var hasNum = false;
@@ -73,7 +77,8 @@ function generatePassword() {
     for (i = 0; i < password.length; i++) {
       if (lowercase.includes(password[i])) {
         hasLowerLetter = true;
-      } else if (uppercase.includes(password[i])) {
+      } 
+      if (uppercase.includes(password[i])) {
         hasUpperLetter = true;
       }
       if (nums.includes(password[i])) {
