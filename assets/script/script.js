@@ -14,91 +14,88 @@ function generatePassword() {
 
   if (numChar >= 8 && numChar <= 128) {
   } else {
-    alert('The number you entered is either too low or too high in value. Please try again');
+    alert('The number you entered is either too low or too high in value. Please try again.');
     return "";
   }
 
-  var includeLower = confirm(
+  var includesLower = confirm(
     'Would you like to include lowercase letters in your password?'
   );
 
-  var includeUpper = confirm(
+  var includesUpper = confirm(
     'Would you like to include uppercase letters in your password?'
   );
 
-  var includeNum = confirm(
+  var includesNum = confirm(
     'Would you like to include numbers in your password?'
   );
 
-  var includeSpecialChar = confirm(
+  var includesSpecialChar = confirm(
     'Would you like to include special characters in your password?'
   );
 
   if (
-    includeLower === false &&
-    includeUpper === false &&
-    includeNum === false &&
-    includeSpecialChar === false
+    !includesLower && 
+    !includesUpper && 
+    !includesNum && 
+    !includesSpecialChar
   ) {
-    alert('No requirements selected');
+    alert('No requirements selected, please try again.');
+    return "";
   }
 
-  var totalChar = "";
-  var password = "";
+  while(true) {
+    var totalChar = "";
 
-  if (includeLower === true) {
-    totalChar += lowercase;
-  }
-  if (includeUpper === true) {
-    totalChar += uppercase;
-  }
-  if (includeNum === true) {
-    totalChar += nums;
-  }
-  if (includeSpecialChar === true) {
-    totalChar += specialChar;
-  }
+    if (includesLower) {
+      totalChar += lowercase;
+    }
+    if (includesUpper) {
+      totalChar += uppercase;
+    }
+    if (includesNum) {
+      totalChar += nums;
+    }
+    if (includesSpecialChar) {
+      totalChar += specialChar
+    }
 
-  while (true) {
-    for (var i = 0; i < numChar; i++) {
+    var password = "";
+
+    for (i = 0; i < numChar; i++) {
       var randomChar = Math.floor(Math.random() * totalChar.length);
       password += totalChar[randomChar];
     }
 
-    if (password.length !== numChar) {
-      password = password.slice(0, numChar)
-    }
-
-    var hasLowerLetter = false;
-    var hasUpperLetter = false;
+    var hasLower = false;
+    var hasUpper = false;
     var hasNum = false;
     var hasSpecialChar = false;
 
-    for (i = 0; i < password.length; i++) {
-      if (lowercase.includes(password[i])) {
-        hasLowerLetter = true;
-      } 
-      if (uppercase.includes(password[i])) {
-        hasUpperLetter = true;
+    for (char of password) {
+      if (lowercase.includes(password[char])) {
+        hasLower = true;
       }
-      if (nums.includes(password[i])) {
+      if (uppercase.includes(password[char])) {
+        hasUpper = true;
+      }
+      if (nums.includes(password[char])) {
         hasNum = true;
       }
-      if (specialChar.includes(password[i])) {
+      if (specialChar.includes(password[char])) {
         hasSpecialChar = true;
       }
     }
 
     if (
-      (!includeLower || hasLowerLetter) &&
-      (!includeUpper || hasUpperLetter) &&
-      (!includeNum || hasNum) &&
-      (!includeSpecialChar || hasSpecialChar)
+      includesLower === hasLower && 
+      includesUpper === hasUpper && 
+      includesNum === hasNum && 
+      includesSpecialChar === hasSpecialChar
     ) {
       break;
-    } 
+    }
   }
-
   console.log(password);
 
   return password;
