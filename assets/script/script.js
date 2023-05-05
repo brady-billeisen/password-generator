@@ -17,7 +17,7 @@ function generatePassword() {
   var passwordLength = parseInt(numChar);
 
   // making conditional to make sure their input meets the criteria
-  if (passwordLength >= 8 && passwordLength <= 128) {
+  if (!passwordLength || passwordLength < 8 || passwordLength > 128) {
   } else {
     alert('The number you entered is either too low or too high in value. Please try again.');
     return "";
