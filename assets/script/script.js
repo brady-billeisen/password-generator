@@ -13,8 +13,11 @@ function generatePassword() {
     'Please enter how long you would like your password. It must be 8-128 characters'
   );
 
+  // establishing variable for the length by turning it into an integer
+  var passwordLength = parseInt(numChar);
+
   // making conditional to make sure their input meets the criteria
-  if (numChar >= 8 && numChar <= 128) {
+  if (passwordLength >= 8 && passwordLength <= 128) {
   } else {
     alert('The number you entered is either too low or too high in value. Please try again.');
     return "";
@@ -72,7 +75,7 @@ function generatePassword() {
     // grab a random character and add it into the variable
     var password = "";
 
-    for (i = 0; i < numChar; i++) {
+    for (i = 0; i < passwordLength; i++) {
       var randomChar = Math.floor(Math.random() * totalChar.length);
       password += totalChar[randomChar];
     }
