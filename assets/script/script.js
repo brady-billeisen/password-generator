@@ -42,80 +42,74 @@ function generatePassword() {
   );
 
   if (
-    !includesLower && 
-    !includesUpper && 
-    !includesNum && 
+    !includesLower &&
+    !includesUpper &&
+    !includesNum &&
     !includesSpecialChar
   ) {
     alert('No requirements selected, please try again.');
     return "";
   }
 
-  // set up a while loop so that if the core of the function isn't true,
-  // it will start the loop over and regenerate until the core is true, then it will break
-  while(true) {
-    // establishing a variable for the total characters selected by the user
-    // and set up conditionals to check which ones were selected and then add them to the variable
-    var totalChar = "";
+  // establishing a variable for the total characters selected by the user
+  // and set up conditionals to check which ones were selected and then add them to the variable
+  var totalChar = "";
 
-    if (includesLower) {
-      totalChar += lowercase;
-    }
-    if (includesUpper) {
-      totalChar += uppercase;
-    }
-    if (includesNum) {
-      totalChar += nums;
-    }
-    if (includesSpecialChar) {
-      totalChar += specialChar
-    }
+  if (includesLower) {
+    totalChar += lowercase;
+  }
+  if (includesUpper) {
+    totalChar += uppercase;
+  }
+  if (includesNum) {
+    totalChar += nums;
+  }
+  if (includesSpecialChar) {
+    totalChar += specialChar
+  }
 
-    // establishing a variable for the password, and then a for loop that will
-    // grab a random character and add it into the variable
-    var password = "";
+  // establishing a variable for the password, and then a for loop that will
+  // grab a random character and add it into the variable
+  var password = "";
 
-    for (i = 0; i < passwordLength; i++) {
-      var randomChar = Math.floor(Math.random() * totalChar.length);
-      password += totalChar[randomChar];
+  for (i = 0; i < passwordLength; i++) {
+    var randomChar = Math.floor(Math.random() * totalChar.length);
+    password += totalChar[randomChar];
+  }
+
+  // establishing variables equal to false and
+  // creating a for loop to make sure the password meets all selected criteria
+  // then conditionals so if it contains the criteria selected, the variable will be switched to true
+  var hasLower = false;
+  var hasUpper = false;
+  var hasNum = false;
+  var hasSpecialChar = false;
+
+  for (char of password) {
+    if (lowercase.includes(password[char])) {
+      hasLower = true;
     }
-
-    // establishing variables equal to false and
-    // creating a for loop to make sure the password meets all selected criteria
-    // then conditionals so if it contains the criteria selected, the variable will be switched to true
-    var hasLower = false;
-    var hasUpper = false;
-    var hasNum = false;
-    var hasSpecialChar = false;
-
-    for (char of password) {
-      if (lowercase.includes(password[char])) {
-        hasLower = true;
-      }
-      if (uppercase.includes(password[char])) {
-        hasUpper = true;
-      }
-      if (nums.includes(password[char])) {
-        hasNum = true;
-      }
-      if (specialChar.includes(password[char])) {
-        hasSpecialChar = true;
-      }
+    if (uppercase.includes(password[char])) {
+      hasUpper = true;
     }
-
-    // final conditional to make sure the includes variables and the has variables
-    // are equal to each other like they're supposed to be
-    // if they are, then the while loop breaks
-    // if they aren't then it will start the loop over and generate a new password until everything is true
-    if (
-      includesLower === hasLower && 
-      includesUpper === hasUpper && 
-      includesNum === hasNum && 
-      includesSpecialChar === hasSpecialChar
-    ) {
-      break;
+    if (nums.includes(password[char])) {
+      hasNum = true;
+    }
+    if (specialChar.includes(password[char])) {
+      hasSpecialChar = true;
     }
   }
+
+  // final conditional to make sure the includes variables and the has variables
+  // are equal to each other like they're supposed to be
+  // if they are, then the while loop breaks
+  // if they aren't then it will start the loop over and generate a new password until everything is true
+  if (
+    includesLower === hasLower &&
+    includesUpper === hasUpper &&
+    includesNum === hasNum &&
+    includesSpecialChar === hasSpecialChar
+  )
   console.log(password);
 
   return password;
